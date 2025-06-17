@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact - Your Name">
+    <title>Contact - Your Name</title>
+
+    <!-- External CSS File for the Button Styling -->
+    <link rel="stylesheet" href="contact.css">
+
+    <style>
+        /* Internal CSS for the overall layout and form styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            background-color: #333;
+            margin: 0;
+        }
+
+        header nav ul li {
+            margin: 0;
+        }
+
+        header nav ul li a {
+            display: block;
+            padding: 14px 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        header nav ul li a:hover {
+            background-color: #575757;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Error messages */
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="survey.html">Survey</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contact">
+            <h1>Contact Me</h1>
+            <form id="contact-form" novalidate>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <span id="email-error" class="error"></span>
+
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+                <span id="phone-error" class="error"></span>
+
+                <div class="button-container">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer with inline CSS -->
+    <footer style="background-color: #333; color: white; text-align: center; padding: 15px 0; font-size: 14px;">
+        <p style="margin: 0;">&copy; 2025 ngwandu dome teng'wa. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for form validation -->
+    <script>
+        // Form validation
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form submission to handle validation first
+
+            let isValid = true;
+
+            // Clear previous error messages
+            document.getElementById('email-error').textContent = '';
+            document.getElementById('phone-error').textContent = '';
+
+            // Validate email field
+            const email = document.getElementById('email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('email-error').textContent = 'Please enter a valid email address.';
+                isValid = false;
+            }
+
+            // Validate phone number field
+            const phone = document.getElementById('phone').value.trim();
+            const phoneRegex = /^[0-9]{10}$/;  // Basic validation for 10-digit phone number
+            if (!phoneRegex.test(phone)) {
+                document.getElementById('phone-error').textContent = 'Please enter a valid 10-digit phone number.';
+                isValid = false;
+            }
+
+            // If validation is successful, submit the form (you can process form data here)
+            if (isValid) {
+                alert('Form submitted successfully!');
+                // Uncomment this line to actually submit the form after successful validation
+                // this.submit();
+            }
+        });
+    </script>
+</body>
+</html>

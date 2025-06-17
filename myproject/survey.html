@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Survey - Your Name"/>
+  <title>Survey - Your Name</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      background-color: #333;
+      margin: 0;
+    }
+
+    header nav ul li {
+      margin: 0;
+    }
+
+    header nav ul li a {
+      display: block;
+      padding: 14px 20px;
+      color: white;
+      text-decoration: none;
+    }
+
+    header nav ul li a:hover {
+      background-color: #575757;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    button {
+      background: linear-gradient(135deg, #28a745, #218838);
+      color: #fff;
+      padding-left:80px;
+      padding-right:80px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      display: inline-block;
+      line-height: 1.5;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #218838, #1e7e34);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="survey.html">Survey</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="survey">
+      <form id="survey-form" novalidate>
+        <h1 style="text-align: center;">Survey</h1>
+
+        <label for="survey-email">Email:</label>
+        <input type="email" id="survey-email" name="email" required />
+        <span id="survey-email-error" class="error"></span><br><br>
+
+        <label>Preferred Contact Method:</label>
+        <input type="radio" id="contact-email" name="contact" value="email" />Email
+        <input type="radio" id="contact-phone" name="contact" value="phone" />Phone
+        <div id="contact-error" class="error"></div>
+
+        <label>Choose Your Skills:</label>
+        <input type="checkbox" id="html" name="skills" value="html" />HTML
+        <input type="checkbox" id="css" name="skills" value="css" />CSS
+        <input type="checkbox" id="javascript" name="skills" value="javascript" />JavaScript
+        <div id="skills-error" class="error"></div>
+
+        <label for="comments">Comments:</label>
+        <textarea id="comments" name="comments"></textarea><br>
+
+        <div class="button-container">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer style="background-color: #333; color: white; text-align: center; padding: 15px 0; font-size: 14px;">
+    <p style="margin: 0;">&copy; 2025 ngwandu dome teng'wa .all right are reserved</p>
+  </footer>
+
+  <script>
+    document.getElementById('survey-form').addEventListener('submit', function (e) {
+      e.preventDefault(); // prevent default form submission
+
+      let isValid = true;
+
+      // Clear previous errors
+      document.getElementById('survey-email-error').textContent = '';
+      document.getElementById('contact-error').textContent = '';
+      document.getElementById('skills-error').textContent = '';
+
+      // Email validation
+      const email = document.getElementById('survey-email').value.trim();
+      const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById('survey-email-error').textContent = 'Please enter a valid email.';
+        isValid = false;
+      }
+
+      // Contact method validation
+      const contactOptions = document.getElementsByName('contact');
+      let contactSelected = false;
+      for (let option of contactOptions) {
+        if (option.checked) {
+          contactSelected = true;
+          break;
+        }
+      }
+      if (!contactSelected) {
+        document.getElementById('contact-error').textContent = 'Please select a contact method.';
+        isValid = false;
+      }
+
+      // Skills validation
+      const skills = document.getElementsByName('skills');
+      let skillChecked = false;
+      for (let skill of skills) {
+        if (skill.checked) {
+          skillChecked = true;
+          break;
+        }
+      }
+      if (!skillChecked) {
+        document.getElementById('skills-error').textContent = 'Please select at least one skill.';
+        isValid = false;
+      }
+
+      if (isValid) {
+        alert('Form submitted successfully!');
+        // this.submit(); // Uncomment if using server-side submission
+      }
+    });
+  </script>
+</body>
+</html>

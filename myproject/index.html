@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Personal portfolio website showcasing web development skills" />
+  <meta name="keywords" content="web development, portfolio, projects, HTML, CSS, JavaScript" />
+  <meta name="author" content="Your Name" />
+  <title>Your Name - Portfolio</title>
+
+  <!-- External CSS (optional) -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Internal CSS for Dark/Light Mode -->
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.3s, color 0.3s; /* Smooth transition for theme change */
+    }
+
+    /* Light Mode Styles */
+    body.light-mode {
+      background-color: #f0f2f5;
+      color: #222;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #222;
+      color: #f0f2f5;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 15px 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    /* Link Styling */
+    nav ul li a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s, text-decoration 0.3s; /* Smooth transition */
+    }
+
+    /* Link Hover Effect */
+    nav ul li a:hover {
+      color: #fff;  /* For dark mode links (hover will be white) */
+      text-decoration: underline;
+    }
+
+    /* Light Mode Link Hover */
+    body.light-mode nav ul li a:hover {
+      color: #222;  /* For light mode links (hover will be black) */
+    }
+
+    main {
+      flex: 1;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    #hero h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    #hero p {
+      font-size: 1.2em;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 14px;
+    }
+
+    /* Button styling for dark/light mode toggle */
+    .toggle-btn {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    .toggle-btn:hover {
+      background-color: #555;
+    }
+
+    /* Google Map Image Styling */
+    #google-map {
+      margin-top: 40px;
+    }
+
+    #google-map img {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body class="light-mode"> <!-- Default to light mode -->
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="survey.html">Survey</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero">
+      <h1>Welcome to My Portfolio</h1>
+      <p>Discover my web development projects and skills.</p>
+    </section>
+
+    <section id="greeting">
+      <script src="greeting.js"></script> <!-- JavaScript will dynamically generate the greeting message -->
+    </section>
+
+    <section id="google-map">
+      <h2>Find Me Here</h2>
+      <a href="https://www.google.com/maps/place/Your+Location" target="_blank">
+        <img src="google map.png" alt="Google Map Image">
+      </a>
+      <p>Click the image to open in Google Maps</p>
+    </section>
+
+    <!-- Toggle Button for Dark/Light Mode -->
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 ngwandu dome teng'wa .all right are reserved</p>
+  </footer>
+
+  <!-- JavaScript for Dark/Light Mode Toggle -->
+  <script>
+    // Function to toggle the dark and light mode
+    function toggleTheme() {
+      const body = document.body;
+      body.classList.toggle("dark-mode");
+      body.classList.toggle("light-mode");
+
+      // Save the current theme in localStorage
+      if (body.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+      } else {
+        localStorage.setItem("theme", "light");
+      }
+    }
+
+    // Load the theme from localStorage if it's set
+    window.onload = function () {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.body.classList.add(savedTheme + "-mode");
+      } else {
+        document.body.classList.add("light-mode"); // Default to light mode
+      }
+    };
+  </script>
+
+</body>
+</html>
